@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<div th:replace="~{components :: head}"></div>
+		<title>Accounts</title>
+	</head>
+
+	<body>
+		<div th:replace="~{components :: nav}"></div>
+
+		<div class="center">
+			<h2>Account Management</h2>
+			<a href="/acct/add"><i class="fas fa-user-plus"></i></a>
+			<br />
+			<table class="table table-light table-striped mt-2">
+				<thead class="border border-start border-end">
+					<tr class="border border-start border-end">
+						<th class="border border-start border-end">ID</th>
+						<th class="border border-start border-end">Name</th>
+						<th class="border border-start border-end">Balance</th>
+						<th
+							colspan="2"
+							class="border border-start border-end"
+						>
+							Manage
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						th:each="a : ${accs}"
+						class="border border-start border-end"
+					>
+						<td
+							th:text="${a.acc_id}"
+							class="border border-start border-end"
+						></td>
+						<td
+							th:text="${a.acc_name}"
+							class="border border-start border-end"
+						></td>
+						<td
+							th:text="${a.acc_bal}"
+							class="border border-start border-end"
+						></td>
+						<td>
+							<span sec:authorize="hasAuthority('ROLE_ADMIN')">
+								<a th:href="@{/acct/edit/{acc} (acc=${a.acc_id})}"><i class="fas fa-edit"></i></a>
+							</span>
+						</td>
+						<td>
+							<span sec:authorize="hasAuthority('ROLE_ADMIN')">
+								<a th:href="@{/acct/delete/{acc} (acc=${a.acc_id})}"><i class="fas fa-trash-alt"></i></a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div th:replace="~{components :: footer}"></div>
+		<div th:replace="~{components :: scripts}"></div>
+	</body>
+</html>

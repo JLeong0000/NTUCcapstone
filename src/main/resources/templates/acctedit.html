@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<div th:replace="~{components :: head}"></div>
+		<title>Account Edit</title>
+	</head>
+
+	<body>
+		<div th:replace="~{components :: nav}"></div>
+		<div class="center">
+			<h2>Account Edit</h2>
+		</div>
+		<form
+			action="/acct/save_edit"
+			class="formcenter"
+		>
+			<div class="form-group">
+				<label for="id">ID</label>
+				<input
+					type="number"
+					class="form-control"
+					id="id"
+					name="id"
+					aria-describedby="emailHelp"
+					th:value="${acc.acc_id}"
+					readonly
+				/>
+			</div>
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input
+					type="name"
+					class="form-control"
+					id="name"
+					name="name"
+					aria-describedby="emailHelp"
+					th:value="${acc.acc_name}"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="bal">Balance</label>
+				<input
+					type="text"
+					class="form-control"
+					id="bal"
+					name="bal"
+					th:value="${acc.acc_bal}"
+				/>
+			</div>
+			<button
+				type="submit"
+				class="btn btn-primary"
+			>
+				save
+			</button>
+		</form>
+
+		<div th:replace="~{components :: footer}"></div>
+		<div th:replace="~{components :: scripts}"></div>
+	</body>
+</html>

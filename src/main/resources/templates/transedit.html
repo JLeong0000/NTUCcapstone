@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<div th:replace="~{components :: head}"></div>
+		<title>Transaction Edit</title>
+	</head>
+
+	<body>
+		<div th:replace="~{components :: nav}"></div>
+		<div class="center">
+			<h2>Transaction Edit</h2>
+		</div>
+		<form
+			action="/transact/save_edit"
+			class="formcenter"
+		>
+			<div class="form-group">
+				<label for="id">ID</label>
+				<input
+					type="number"
+					class="form-control"
+					id="id"
+					name="id"
+					th:value="${tran.trans_id}"
+					readonly
+				/>
+			</div>
+			<div class="form-group">
+				<label for="acc_id">Account</label>
+				<!-- Hidden account ID input -->
+				<input
+					type="hidden"
+					name="acc_id"
+					id="acc_id"
+					th:value="${tran.accs.acc_id}"
+				/>
+				<!-- Visible input to show both account name and ID -->
+				<input
+					type="text"
+					class="form-control"
+					name="acc_display"
+					id="acc_display"
+					th:value="${tran.accs.acc_name} + ' - ' + ${tran.accs.acc_id}"
+					readonly
+				/>
+			</div>
+
+			<div class="form-group">
+				<label for="newType">Type</label>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					<!-- Hidden prevType input -->
+					<input
+						type="hidden"
+						name="prevType"
+						id="prevType"
+						th:value="${tran.trans_type}"
+					/>
+					<!-- Visible newType input -->
+					<select
+						name="newType"
+						id="newType"
+						class="form-control selectpicker"
+					>
+						<option
+							th:selected="${'Deposit' == tran.trans_type}"
+							value="Deposit"
+						>
+							Deposit
+						</option>
+						<option
+							th:selected="${'Withdraw' == tran.trans_type}"
+							value="Withdraw"
+						>
+							Withdraw
+						</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="newAmt">Amount</label>
+				<!-- Hidden prevAmt input -->
+				<input
+					type="hidden"
+					name="prevAmt"
+					id="prevAmt"
+					th:value="${tran.trans_amt}"
+				/>
+				<!-- Visible newAmt input -->
+				<input
+					type="text"
+					class="form-control"
+					id="newAmt"
+					name="newAmt"
+					th:value="${tran.trans_amt}"
+				/>
+			</div>
+			<button
+				type="submit"
+				class="btn btn-primary"
+			>
+				save
+			</button>
+		</form>
+
+		<div th:replace="~{components :: footer}"></div>
+		<div th:replace="~{components :: scripts}"></div>
+	</body>
+</html>

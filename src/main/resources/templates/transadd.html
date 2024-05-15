@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<div th:replace="~{components :: head}"></div>
+		<title>Add Transaction</title>
+	</head>
+
+	<body>
+		<div th:replace="~{components :: nav}"></div>
+
+		<div class="container h-100">
+			<div class="row h-100 justify-content-center align-items-center">
+				<div class="col-12 col-md-10 col-lg-10 center card mt-5">
+					<form
+						class="well form-horizontal"
+						action="/transact/save "
+						id="contact_form"
+					>
+						<fieldset>
+							<!-- Form Name -->
+							<legend>
+								<h2><b>Add Transaction</b></h2>
+							</legend>
+							<br />
+
+							<!-- Text input-->
+							<center>
+								<div class="form-group">
+									<label
+										for="acc_id"
+										class="col-md-4 control-label"
+										>Account</label
+									>
+									<div class="col-md-4 selectContainer">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+											<select
+												name="acc_id"
+												id="acc_id"
+												class="form-control selectpicker"
+											>
+												<option
+													th:each="a : ${accs}"
+													th:value="${a.acc_id}"
+													th:text="${a.acc_name} + ' - ' + ${a.acc_id}"
+												></option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<!-- Text input-->
+
+								<div class="form-group">
+									<label
+										for="type"
+										class="col-md-4 control-label"
+										>Type</label
+									>
+									<div class="col-md-4 inputGroupContainer">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+											<select
+												name="type"
+												id="type"
+												class="form-control selectpicker"
+											>
+												<option value="Deposit">Deposit</option>
+												<option value="Withdraw">Withdraw</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<!-- Text input-->
+
+								<div class="form-group">
+									<label
+										for="amt"
+										class="col-md-4 control-label"
+										>Amount</label
+									>
+									<div class="col-md-4 inputGroupContainer">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+											<input
+												id="amt"
+												name="amt"
+												placeholder="Amount"
+												class="form-control"
+												type="number"
+												step="any"
+											/>
+										</div>
+									</div>
+								</div>
+
+								<!-- Button -->
+								<div class="form-group">
+									<label class="col-md-4 control-label"></label>
+									<div class="col-md-4">
+										<br />
+										<button
+											type="submit"
+											class="btn btn-secondary"
+											disabled
+											th:attr="hidden=${!#lists.isEmpty(accs)}"
+										>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</button>
+										<button
+											type="submit"
+											class="btn btn-warning"
+											th:attr="hidden=${#lists.isEmpty(accs)}"
+										>
+											&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+										</button>
+									</div>
+								</div>
+							</center>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div th:replace="~{components :: footer}"></div>
+		<div th:replace="~{components :: scripts}"></div>
+	</body>
+</html>

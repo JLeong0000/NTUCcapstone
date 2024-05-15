@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<div th:replace="~{components :: head}"></div>
+		<title>Transactions</title>
+	</head>
+
+	<body>
+		<div th:replace="~{components :: nav}"></div>
+
+		<div class="center">
+			<h2>Transaction Management</h2>
+			<a href="/transact/add"><i class="fas fa-user-plus"></i></a>
+			<div class="my-2">
+				<span>View:</span>
+				<button class="btn btn-primary px-2 mx-1">
+					<a
+						class="text-white"
+						href="/transact/view"
+						>All</a
+					>
+				</button>
+
+				<div
+					th:each="a : ${accs}"
+					style="display: inline; flex-wrap: wrap"
+				>
+					<button class="btn btn-primary px-2 mx-1">
+						<a
+							th:href="@{/transact/view/{acc_id}(acc_id=${a.acc_id})}"
+							class="text-white"
+							th:text="|${a.acc_name} - ${a.acc_id}|"
+						>
+						</a>
+					</button>
+				</div>
+			</div>
+			<table class="table table-light table-striped mt-2">
+				<thead class="border border-start border-end">
+					<tr class="border border-start border-end">
+						<th class="border border-start border-end">ID</th>
+						<th class="border border-start border-end">Account</th>
+						<th class="border border-start border-end">Type</th>
+						<th class="border border-start border-end">Amount</th>
+						<th
+							colspan="2"
+							class="border border-start border-end"
+						>
+							Manage
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr
+						th:each="t : ${trans}"
+						class="border border-start border-end"
+					>
+						<td
+							th:text="${t.trans_id}"
+							class="border border-start border-end"
+						></td>
+						<td
+							th:text="${t.accs.acc_name} + ' - ' + ${t.accs.acc_id}"
+							class="border border-start border-end text-nowrap"
+						></td>
+						<td
+							th:text="${t.trans_type}"
+							class="border border-start border-end"
+						></td>
+						<td
+							th:text="${t.trans_amt}"
+							class="border border-start border-end"
+						></td>
+						<td>
+							<span sec:authorize="hasAuthority('ROLE_ADMIN')">
+								<a th:href="@{/transact/edit/{tran} (tran=${t.trans_id})}"><i class="fas fa-edit"></i></a>
+							</span>
+						</td>
+						<td>
+							<span sec:authorize="hasAuthority('ROLE_ADMIN')">
+								<a
+									th:href="@{/transact/delete
+										(id=${t.trans_id},
+										type=${t.trans_type},
+										amt=${t.trans_amt},
+										acc_id=${t.accs.acc_id})}
+								"
+									><i class="fas fa-trash-alt"></i
+								></a>
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div th:replace="~{components :: footer}"></div>
+		<div th:replace="~{components :: scripts}"></div>
+	</body>
+</html>

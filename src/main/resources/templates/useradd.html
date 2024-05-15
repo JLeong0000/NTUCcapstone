@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<div th:replace="~{components :: head}"></div>
+		<title>Add User</title>
+	</head>
+
+	<body>
+		<div th:replace="~{components :: nav}"></div>
+
+		<div class="container h-100">
+			<div class="row h-100 justify-content-center align-items-center">
+				<div class="col-12 col-md-10 col-lg-10 center card mt-5">
+					<form
+						class="well form-horizontal"
+						action="/users/save "
+						id="contact_form"
+					>
+						<fieldset>
+							<!-- Form Name -->
+							<legend>
+								<h2><b>Registration Form</b></h2>
+							</legend>
+							<br />
+							<div
+								th:if="${param.error}"
+								class="alert alert-danger"
+							>
+								Username already in use
+							</div>
+							<!-- Text input-->
+							<center>
+								<div class="form-group">
+									<label
+										for="role"
+										class="col-md-4 control-label"
+										>Role</label
+									>
+									<div class="col-md-4 selectContainer">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+											<select
+												name="role"
+												class="form-control selectpicker"
+											>
+												<option value="ROLE_USER">User</option>
+												<option value="ROLE_ADMIN">Admin</option>
+											</select>
+										</div>
+									</div>
+								</div>
+
+								<!-- Text input-->
+
+								<div class="form-group">
+									<label
+										for="name"
+										class="col-md-4 control-label"
+										>Username</label
+									>
+									<div class="col-md-4 inputGroupContainer">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+											<input
+												name="name"
+												placeholder="Username"
+												class="form-control"
+												type="text"
+											/>
+										</div>
+									</div>
+								</div>
+
+								<!-- Text input-->
+
+								<div class="form-group">
+									<label
+										for="pwd"
+										class="col-md-4 control-label"
+										>Password</label
+									>
+									<div class="col-md-4 inputGroupContainer">
+										<div class="input-group">
+											<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+											<input
+												name="pwd"
+												placeholder="Password"
+												class="form-control"
+												type="password"
+											/>
+										</div>
+									</div>
+								</div>
+
+								<!-- Button -->
+								<div class="form-group">
+									<label class="col-md-4 control-label"></label>
+									<div class="col-md-4">
+										<br />
+										<button
+											type="submit"
+											class="btn btn-warning"
+										>
+											&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSUBMIT <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+										</button>
+									</div>
+								</div>
+							</center>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div th:replace="~{components :: footer}"></div>
+		<div th:replace="~{components :: scripts}"></div>
+	</body>
+</html>

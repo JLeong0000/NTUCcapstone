@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Home - Capstone Bank</title>
+		<link
+			rel="preconnect"
+			href="https://fonts.googleapis.com"
+		/>
+		<link
+			rel="preconnect"
+			href="https://fonts.gstatic.com"
+			crossorigin
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700&family=VT323&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="../assets/css/styles.css"
+		/>
+		<div th:replace="~{components :: head}"></div>
+	</head>
+	<body>
+		<div th:replace="~{components :: nav}"></div>
+
+		<!-- Main Content -->
+		<main class="container mt-5 pt-5 w-75">
+			<h1 class="page-title text-center">Welcome to Capstone Bank</h1>
+			<p class="text-center my-3">Logged in as: <span th:text="${user}"></span></p>
+			<h4 class="text-dark text-center mt-5 mb-4">A Quick Overview Of Your Finances</h4>
+
+			<!-- Account Balance and Transactions Overview -->
+			<div class="row">
+				<!-- Account Balance -->
+				<div class="mb-4 col-md-6">
+					<div class="card shadow-sm">
+						<div class="card-body">
+							<h5 class="card-title">Accounts Overview</h5>
+							<div th:each="a : ${accs}">
+								<p>
+									<span th:text="${a.acc_name} + ':'"></span>
+									<span th:text="'$' + ${a.acc_bal}"></span>
+								</p>
+							</div>
+							<a
+								th:href="@{/acct/view}"
+								class="btn btn-primary"
+								>View All Accounts</a
+							>
+						</div>
+					</div>
+				</div>
+				<!-- Recent Transactions -->
+				<div class="mb-4 col-md-6">
+					<div class="card shadow-sm">
+						<div class="card-body">
+							<h5 class="card-title">Recent Transactions</h5>
+							<div th:each="t : ${trans}">
+								<p>
+									<span th:text="${t.trans_type} + ':'"></span>
+									<span th:text="'$' + ${t.trans_amt}"></span>
+								</p>
+							</div>
+							<a
+								th:href="@{/transact/view}"
+								class="btn btn-primary"
+								>View All Transactions</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<div th:replace="~{components :: footer}"></div>
+		<div th:replace="~{components :: scripts}"></div>
+
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+	lang="en"
+	xmlns:th="http://www.thymeleaf.org"
+>
+	<head>
+		<div th:replace="~{components :: head}"></div>
+		<title>User Edit</title>
+	</head>
+
+	<body>
+		<div th:replace="~{components :: nav}"></div>
+		<div class="center">
+			<h2>User Edit</h2>
+		</div>
+		<form
+			action="/users/save_edit"
+			class="formcenter"
+		>
+			<div class="form-group">
+				<label for="id">ID</label>
+				<input
+					type="number"
+					class="form-control"
+					id="id"
+					name="id"
+					aria-describedby="emailHelp"
+					th:value="${user.id}"
+					readonly
+				/>
+			</div>
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input
+					type="name"
+					class="form-control"
+					id="name"
+					name="name"
+					aria-describedby="emailHelp"
+					th:value="${user.name}"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password</label>
+				<input
+					type="password"
+					class="form-control"
+					id="pwd"
+					name="pwd"
+					th:value="${user.pass}"
+				/>
+			</div>
+			<div class="form-group">
+				<label for="role">roles</label>
+				<select
+					name="role"
+					class="form-control selectpicker"
+					th:field="*{user.role}"
+				>
+					<option value="ROLE_USER">User</option>
+					<option value="ROLE_ADMIN">Admin</option>
+				</select>
+			</div>
+			<button
+				type="submit"
+				class="btn btn-primary"
+			>
+				save
+			</button>
+		</form>
+
+		<div th:replace="~{components :: footer}"></div>
+		<div th:replace="~{components :: scripts}"></div>
+	</body>
+</html>
