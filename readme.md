@@ -31,8 +31,13 @@ The project aims to create a comprehensive banking application using Java Spring
 1. Clone the repository to your local machine.
 2. Ensure you have Java 22 and MySQL 8.3.0 installed.
 3. Import the project into your preferred IDE.
-4. Configure the MySQL database settings in the application properties file.
-5. Run the application.
+4. Create a .env file in the root directory
+```
+SPRING_DATASOURCE_USERNAME=database_username
+SPRING_DATASOURCE_PASSWORD=database_password
+```  
+5. Configure the MySQL database settings in the .env file.
+6. Run the application.
 
 ## Usage
 
